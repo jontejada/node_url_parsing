@@ -9,7 +9,7 @@ function handleRequest(req, res) {
 	
 	var splitQuery = req.url.split('?')[1].split('&');
 	for (var i=0; i<splitQuery.length; i++) {
-		urltwo.query[splitQuery[i].split('=')[0]] = splitQuery[i].split('=')[1];
+		urltwo.query[splitQuery[i].split('=')[0]] = decodeURI( splitQuery[i].split('=')[1] );
 	}
 
 	res.setHeader("Content-Type", "text/plain");  
