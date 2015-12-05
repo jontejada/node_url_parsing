@@ -4,9 +4,17 @@ var server = null;
 var urltwo = {};
 
 function handleRequest(req, res) {
-	urltwo.pathname = req.url;
+	urltwo.pathname = req.url.split('?')[0];
+	urltwo.query = {};
+	
+	var splitQuery = req.url.split('?')[1].split('&');
+	for (var i=0; i<splitQuery.length; i++) {
+		urltwo.query[splitQuery[i].split('=')[0]] = splitQuery[i].split('=')[1];
+	}
+
 	res.setHeader("Content-Type", "text/plain");  
- 	res.end(urltwo.pathname.split('?')[0]);
+ 	res.end(JSON.stringify(urltwo.query));
+ 	console.log(urltwo);
 }
 
 server = http.createServer(handleRequest);
