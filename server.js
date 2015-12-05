@@ -1,11 +1,13 @@
 var http = require('http');
-
 var server = null;
 
+var urltwo = {};
+
 function handleRequest(req, res) {
-  res.setHeader("Content-Type", "text/plain");  
-  res.end("This is where you'll be experimenting");
-};
+	urltwo.pathname = req.url;
+	res.setHeader("Content-Type", "text/plain");  
+ 	res.end(urltwo.pathname.split('?')[0]);
+}
 
 server = http.createServer(handleRequest);
 
